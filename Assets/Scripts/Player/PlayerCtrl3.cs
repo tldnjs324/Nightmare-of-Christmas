@@ -8,19 +8,30 @@ public class PlayerCtrl3 : MonoBehaviour
     public float moveSpeed = 10.0f;
     //회전 속도 변수
     public float rotSpeed = 80.0f;
+    //점프 힘 변수
+    public float force = 300;
     //Animation  컴포넌트를 저장하기 위한 변수
     Animation anim;
+    //Rigidbody 컴포넌트를 저장하기 위한 변수
+    Rigidbody rb;
+
+    Vector3 AXiS_X = new Vector3(1, 0, 0);
+    Vector3 AXiS_Y = new Vector3(0, 1, 0);
+    Vector3 AXiS_Z = new Vector3(0, 0, 1);
 
     // Start is called before the first frame update
     void Start()
     {
         //Animation 컴포넌트를 변수에 할당
         anim = GetComponent<Animation>();
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        Jump();
+
         float h = Input.GetAxis("Horizontal");//수평방향
         float v = Input.GetAxis("Vertical");//수직방향
         float r = Input.GetAxis("Mouse X");//마우스 좌우에 의해 회전
@@ -53,5 +64,13 @@ public class PlayerCtrl3 : MonoBehaviour
             anim.CrossFade("Idle", 0.3f);//정지시 Idle 애니메이션
         }
        
+    }
+    //점프 함수
+    void Jump()
+    {
+        if (Input.GetKeyDown("space"))
+        {
+            rb.AddForce(0, force, 0);
+        }
     }
 }
