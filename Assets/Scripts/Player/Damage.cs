@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Damage4 : MonoBehaviour
+public class Damage : MonoBehaviour
 {
     public float currHp = 100;
     //BloodScreen 텍스처를 저장하기 위한 변수

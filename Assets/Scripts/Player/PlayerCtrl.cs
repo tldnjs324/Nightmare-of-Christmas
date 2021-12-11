@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCtrl3 : MonoBehaviour
+public class PlayerCtrl : MonoBehaviour
 {
     //이동 속도 변수
     public float moveSpeed = 10.0f;

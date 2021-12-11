@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class MoveAgent4 : MonoBehaviour
+public class MoveAgent : MonoBehaviour
 {
 
     //순찰 지점들을 저장하기 위한 List타입의 변수

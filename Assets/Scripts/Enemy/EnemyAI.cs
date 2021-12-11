@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAI7 : MonoBehaviour
+public class EnemyAI : MonoBehaviour
 {
 
     //적 캐릭터의 상태를 표현하기 위한 열거형 변수 정의
@@ -30,7 +30,7 @@ public class EnemyAI7 : MonoBehaviour
     //코루틴에서 사용할 지연시간 변수
     WaitForSeconds ws;
     //이동을 제어하는 MoveAgent 클래스를 저장할 변수
-    MoveAgent4 moveAgent;
+    MoveAgent moveAgent;
     //Animator 컴포넌트를 저장할 변수
     Animator animator;
     //총 발사를 제어하는 EnemyFire 클래스를 저장할 변수
@@ -50,7 +50,7 @@ public class EnemyAI7 : MonoBehaviour
         //Animator 컴포넌트 추출
         animator = GetComponent<Animator>();
         //이동을 제어하는 MoveAgent 클래스를 추출
-        moveAgent = GetComponent<MoveAgent4>();
+        moveAgent = GetComponent<MoveAgent>();
         //총 발사를 제어하는 EnemyFire 클래스를 추출
         enemyFire = GetComponent<EnemyFire>();
         //Cycle Offset 값을 불규칙하게 변경

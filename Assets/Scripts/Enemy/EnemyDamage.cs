@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyDamage3 : MonoBehaviour
+public class EnemyDamage : MonoBehaviour
 {
     //생명 게이지
     float hp = 100.0f;
@@ -66,7 +66,7 @@ public class EnemyDamage3 : MonoBehaviour
                 //GetComponent<EnemyAI5>().state = EnemyAI5.State.DIE;
                 //GetComponent<EnemyAI6>().state = EnemyAI6.State.DIE;
                 //GetComponent<EnemyAI6>().state = EnemyAI6.State.DIE;
-                GetComponent<EnemyAI7>().state = EnemyAI7.State.DIE;
+                GetComponent<EnemyAI>().state = EnemyAI.State.DIE;
                 //적 캐릭터가 사망한 이후 생명 게이지를 투명 처리
                 hpBarImage.GetComponentsInParent<Image>()[1].color = Color.clear;
 
