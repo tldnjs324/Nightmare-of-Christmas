@@ -68,7 +68,7 @@ public class PlayerCtrl : MonoBehaviour
     //점프 함수
     void Jump()
     {
-        if (Input.GetKeyDown("space"))
+        if (Input.GetKeyDown("space"))// && this.rb.velocity.y < 0.1 혹시 다른 층 안만든다면 ㄱㄱ
         {
             rb.AddForce(0, force, 0);
         }

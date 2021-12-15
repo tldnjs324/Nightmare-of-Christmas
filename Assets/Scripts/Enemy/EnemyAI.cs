@@ -54,11 +54,11 @@ public class EnemyAI : MonoBehaviour
         //총 발사를 제어하는 EnemyFire 클래스를 추출
         enemyFire = GetComponent<EnemyFire>();
         //Cycle Offset 값을 불규칙하게 변경
-        animator.SetFloat("Offset", Random.Range(0.0f, 1.0f));
+        //animator.SetFloat("Offset", Random.Range(0.0f, 1.0f));
         //Speed 값을 불규칙하게 변경
-        animator.SetFloat("WalkSpeed", Random.Range(1.0f, 1.2f));
+        //animator.SetFloat("WalkSpeed", Random.Range(1.0f, 1.2f));
         //코루틴의 지연시간 생성
-        ws = new WaitForSeconds(0.3f);
+        //ws = new WaitForSeconds(0.3f);
     }
 
     void OnEnable()
@@ -149,10 +149,10 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Speed 파라미터에 이동 속도를 전달
-        animator.SetFloat("Speed", moveAgent.GetSpeed());
+
     }
 
+    //플레이어가 죽었을 때 함수
     public void OnPlayerDie()
     {
         if(isDie == false)//적 캐릭터가 죽은 상태가 아니라면
@@ -161,7 +161,6 @@ public class EnemyAI : MonoBehaviour
             enemyFire.isFire = false;
             //모든 코루틴 함수를 종료시킴
             StopAllCoroutines();
-            animator.SetTrigger("PlayerDie");
         }
     }
 }
