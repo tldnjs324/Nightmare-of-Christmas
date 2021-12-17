@@ -7,6 +7,8 @@ TagManager:
   - BULLET
   - BULLET2
   - ENEMY
+  - FLOOR
+  - CLEAR
   layers:
   - Default
   - TransparentFX

@@ -10,10 +10,18 @@ public class PlayerCtrl : MonoBehaviour
     public float rotSpeed = 80.0f;
     //점프 힘 변수
     public float force = 300;
+    //점프 수 저장 변수
+    public int jumpCount = 2;
     //Animation  컴포넌트를 저장하기 위한 변수
     Animation anim;
     //Rigidbody 컴포넌트를 저장하기 위한 변수
     Rigidbody rb;
+    //Transform 컴포넌트를 저장하기 위한 변수
+    Transform tr;
+    //GameManager 저장 변수
+    public GameManager gameMng;
+    //시간 위한 bool값
+    bool timereturn = true;
 
     Vector3 AXiS_X = new Vector3(1, 0, 0);
     Vector3 AXiS_Y = new Vector3(0, 1, 0);
@@ -25,12 +33,14 @@ public class PlayerCtrl : MonoBehaviour
         //Animation 컴포넌트를 변수에 할당
         anim = GetComponent<Animation>();
         rb = GetComponent<Rigidbody>();
+        tr = GetComponent<Transform>();
     }
 
     // Update is called once per frame
     void Update()
     {
         Jump();
+        //transform.rotation = Quaternion.Euler(new Vector3(0.0f, transform.rotation.y, 0.0f));
 
         float h = Input.GetAxis("Horizontal");//수평방향
         float v = Input.GetAxis("Vertical");//수직방향
@@ -68,9 +78,38 @@ public class PlayerCtrl : MonoBehaviour
     //점프 함수
     void Jump()
     {
-        if (Input.GetKeyDown("space"))// && this.rb.velocity.y < 0.1 혹시 다른 층 안만든다면 ㄱㄱ
+        //스페이스바 누르고, 점프 수가 0보다 크다면 점프=>2단 점프 가능
+        if (Input.GetKeyDown("space") && jumpCount > 0)
         {
             rb.AddForce(0, force, 0);
+            jumpCount--;
         }
+        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //바닥과 충돌했다면 점프 수 2로 돌아옴
+        if(other.gameObject.tag == "FLOOR")
+        {
+            jumpCount = 2;
+        }
+    }
+
+    void OnCollisionEnter(Collision coll)
+    {
+        if (coll.collider.tag == "CLEAR")
+        {
+            if (gameMng.giftCount < 10)
+            {
+                gameMng.NotClear.SetActive(true);
+            }
+            else
+            {
+                gameMng.GameClear.SetActive(true);
+                gameMng.restartBtn.SetActive(true);
+            }
+        }
+
     }
 }

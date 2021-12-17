@@ -6,77 +6,47 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    //적 캐릭터가 출현할 위치를 담을 배열
-    public Transform[] points;
-    //적 캐릭터 프리팹을 저장할 변수
-    public GameObject enemy;
-    //적 캐릭터를 생성할 주기
-    public float createTime = 2.0f;
-    //적 캐릭터의 최대 생성 개수
-    public int maxEnemy = 10;
     //게임 종료 여부를 판단할 변수
     public bool isGameOver = false;
 
-    //Kill Count 표시
-    public Text killText;
-    //적을 죽인 회수
-    int killCount = 0;
+    //Gift Count 표시
+    public Text giftText;
+    //적을 죽인 횟수
+    public int giftCount = 0;
 
     //재시작 버튼
     public GameObject restartBtn;
+    //게임오버 이미지
+    public GameObject GameOver;
+    //게임 클리어 이미지
+    public GameObject GameClear;
+    //다 모으지 못했다는 에러메시지
+    public GameObject NotClear;
 
     // Start is called before the first frame update
     void Start()
     {
-        //하이어아키 뷰의 SpawnPointGroup을 찾아 하위에 있는 모든 Transform 컴포넌트를 찾아옴
-        points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
-        if (points.Length > 0)
-        {
-            StartCoroutine(this.CreateEnemy());
-        }
         
     }
-
-    IEnumerator CreateEnemy()
-    {
-        //게임 종료 시까지 무한 루프
-        while (!isGameOver)
-        {
-            //현재 생성된 적 캐릭터의 개수 산출
-            int enemyCount = (int)GameObject.FindGameObjectsWithTag("ENEMY").Length;
-            //적 캐릭터의 최대 생성 개수보다 작을 때만 적 캐릭터를 생성
-            if (enemyCount < maxEnemy)
-            {
-                //적 캐릭터의 생성 주기 시간만큼 대기
-                yield return new WaitForSeconds(createTime);
-                //불규칙적인 위치 산출
-                int idx = Random.Range(1, points.Length);
-                //적 캐릭터의 동적 생성
-                Instantiate(enemy, points[idx].position, points[idx].rotation);
-            }
-            else
-            {
-                yield return null;
-            }
-        }
-
-        //재시작 버튼 활성화
-        restartBtn.SetActive(true);
-    }
-
+    //Restart버튼 눌렀을 때 다시 시작하는 함수
     public void Restart()
     {
         //씬을 다시 로드
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("NightMare_main");
         //재시작 버튼 비활성화
         restartBtn.SetActive(false);
         isGameOver = false;
     }
-
-    public void AddKillCount()
+    //경고창의 닫기 버튼 눌렀을 때 닫는 함수
+    public void Close_NotClear()
     {
-        ++killCount;//회수 증가
-        killText.text = "Kill Count " + killCount;
+        NotClear.SetActive(false);
+    }
+    //선물 수 증가하고 UI에 표시하는 함수
+    public void AddGift()
+    {
+        ++giftCount;//횟수 증가
+        giftText.text = "Gift " + giftCount;
     }
 
     // Update is called once per frame

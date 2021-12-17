@@ -43,6 +43,7 @@ public class Damage : MonoBehaviour
             StartCoroutine(ShowBloodScreen());
             //생명 게이지의 색상 및 크기 변경 함수를 호출
             DisplayHpBar();
+            transform.rotation = Quaternion.Euler(new Vector3(0.0f, transform.rotation.y, 0.0f));
         }
     }
 
@@ -57,6 +58,11 @@ public class Damage : MonoBehaviour
         {
             enemies[i].SendMessage("OnPlayerDie", SendMessageOptions.DontRequireReceiver);//더이상 응답을 보낼 필요가 없다->send 메시지의 부하를 줄이기 위함
         }
+        //게임메니저에서 재시작 버튼 활성화
+        gameMng.restartBtn.SetActive(true);
+        //게임메니저에서 게임오버 이미지 활성화
+        gameMng.GameOver.SetActive(true);
+        //게임메니저에서 게임오버
         gameMng.isGameOver = true;
     }
 

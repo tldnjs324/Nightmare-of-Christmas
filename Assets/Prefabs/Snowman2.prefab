@@ -42,10 +42,10 @@ GameObject:
   - component: {fileID: 2605463965909232277}
   - component: {fileID: 2605463965909232276}
   - component: {fileID: 2605463965909232283}
-  - component: {fileID: 2605463965909232279}
   - component: {fileID: 2605463965909232280}
+  - component: {fileID: 5899198044426518636}
   m_Layer: 0
-  m_Name: Snowman
+  m_Name: Snowman2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -129,20 +129,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300000, guid: 77e74f65e820c4ea9b756ade108c63d0, type: 3}
---- !u!114 &2605463965909232279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2605463965909232278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 486fa3609cac2db468d398e409183213, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Bullet: {fileID: 6761407789798969534, guid: d6ba9a1a2f3df7c4593f26010fc78fc2, type: 3}
-  firePos: {fileID: 2605463965439167920}
 --- !u!114 &2605463965909232280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,3 +141,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cdedad67180c4246bc9930eda7e6a61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5899198044426518636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2605463965909232278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26e6634efc6d6c345915747ea9ca93c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Bullet: {fileID: 6761407789798969534, guid: d6ba9a1a2f3df7c4593f26010fc78fc2, type: 3}
+  firePos: {fileID: 2605463965439167920}

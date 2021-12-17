@@ -48,12 +48,11 @@ public class EnemyDamage : MonoBehaviour
             //총알 삭제
             Destroy(coll.gameObject);
             //생명 게이지 차감
-            //hp -= coll.gameObject.GetComponent<BulletCtrl>().damage;
             BulletCtrl bc = coll.gameObject.GetComponent<BulletCtrl>();//실제 존재하는지 검사
-            if(bc != null)//어떤 값이 들어왔을 경우에만 생명 게이지  차감 플레이어가 공격한 총알에만 체력 감소 요소가 있기 때문에 적의 총알에는 데미지를 받지 않음
+            if(bc != null)//어떤 값이 들어왔을 경우에만 생명 게이지 차감 플레이어가 공격한 총알에만 체력 감소 요소가 있기 때문에 적의 총알에는 데미지를 받지 않음
             {
                 //생명 게이지 차감
-                hp -= bc.damage;
+                hp -= bc.damage;//bc.damage는 20.0f 그래서 1/5씩 줄어듦
                 //혈흔 효과를 생성하는 함수 호출
                 ShowBloodEffect(coll);
                 //생명 게이지의 fillAmount 속성을 변경
@@ -63,17 +62,12 @@ public class EnemyDamage : MonoBehaviour
             if (hp <= 0.0f)
             {
                 //적 캐릭터의 상태를 DIE로 변경
-                //GetComponent<EnemyAI5>().state = EnemyAI5.State.DIE;
-                //GetComponent<EnemyAI6>().state = EnemyAI6.State.DIE;
-                //GetComponent<EnemyAI6>().state = EnemyAI6.State.DIE;
                 GetComponent<EnemyAI>().state = EnemyAI.State.DIE;
                 //적 캐릭터가 사망한 이후 생명 게이지를 투명 처리
                 hpBarImage.GetComponentsInParent<Image>()[1].color = Color.clear;
 
                 //적캐릭터 사망시 제거
-                Destroy(gameObject, 5);
-                //Kill Count 회수 증가
-                GameObject.Find("GameManager").GetComponent<GameManager>().AddKillCount();
+                Destroy(gameObject);
             }
         }
         

@@ -24,6 +24,7 @@ public class MoveAgent : MonoBehaviour
     //추적 대상의 위치를 저장하는 변수
     Vector3 traceTarget;
 
+    //순찰
     public void SetPatrolling(bool patrol)
     {
         patrolling = patrol;
@@ -32,6 +33,7 @@ public class MoveAgent : MonoBehaviour
         MoveWayPoint();
     }
 
+    //추적
     public void SetTraceTarget(Vector3 pos)
     {
         traceTarget = pos;
@@ -57,13 +59,12 @@ public class MoveAgent : MonoBehaviour
         {
             //WayPointGroup 하위에 있는 모든 Transform 컴포넌트를 추출한 후 
             //List 타입의 wayPoints 배열에 추가
-            group.GetComponentsInChildren<Transform>(wayPoints); //GetComponentsInChildren s주의, 스펠링 주의
+            group.GetComponentsInChildren<Transform>(wayPoints);
             //배열의 첫 번째 항목 삭제
             wayPoints.RemoveAt(0);
             //첫번째로 이동할 위치를 랜덤하게 지정
             nextIdx = Random.Range(0, wayPoints.Count);
         }
-        //MoveWayPoint();//SetPatrolling 생겨서 필요 없어짐
         SetPatrolling(true);
     }
 
@@ -109,8 +110,7 @@ public class MoveAgent : MonoBehaviour
         //NavMeshAgent가 이동하고 있고 목적지에 도착했는지 여부를 계산
         if (agent.velocity.magnitude >= 0.2f && agent.remainingDistance <= 0.5f)
         {
-            //다음 목적지의 배열 첨자를 계산
-            //nextIdx = ++nextIdx % wayPoints.Count;//유니티에서 사용하는 배열의 구조체를 쓰게 되면 count라는 변수로 객체를 얻어낼 수 있다. 
+            //다음 목적지의 배열 첨자를 계산 
             nextIdx = Random.Range(0, wayPoints.Count);
 
             //다음 목적지로 이동 명령을 수행

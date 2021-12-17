@@ -31,8 +31,6 @@ public class EnemyAI : MonoBehaviour
     WaitForSeconds ws;
     //이동을 제어하는 MoveAgent 클래스를 저장할 변수
     MoveAgent moveAgent;
-    //Animator 컴포넌트를 저장할 변수
-    Animator animator;
     //총 발사를 제어하는 EnemyFire 클래스를 저장할 변수
     EnemyFire enemyFire;
 
@@ -48,17 +46,11 @@ public class EnemyAI : MonoBehaviour
         //적 캐릭터의 Transform 컴포넌트 추출
         enemyTr = GetComponent<Transform>();
         //Animator 컴포넌트 추출
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
         //이동을 제어하는 MoveAgent 클래스를 추출
         moveAgent = GetComponent<MoveAgent>();
         //총 발사를 제어하는 EnemyFire 클래스를 추출
         enemyFire = GetComponent<EnemyFire>();
-        //Cycle Offset 값을 불규칙하게 변경
-        //animator.SetFloat("Offset", Random.Range(0.0f, 1.0f));
-        //Speed 값을 불규칙하게 변경
-        //animator.SetFloat("WalkSpeed", Random.Range(1.0f, 1.2f));
-        //코루틴의 지연시간 생성
-        //ws = new WaitForSeconds(0.3f);
     }
 
     void OnEnable()
@@ -82,17 +74,14 @@ public class EnemyAI : MonoBehaviour
                     enemyFire.isFire = false;//총 발사 정지
                     //순찰 모드를 활성화
                     moveAgent.SetPatrolling(true);
-                    animator.SetBool("IsMove", true);
                     break;
                 case State.TRACE:
                     enemyFire.isFire = false;//총 발사 정지
                     //주인공의 위치를 넘겨 추적 모드로 변경
                     moveAgent.SetTraceTarget(playerTr.position);
-                    animator.SetBool("IsMove", true);
                     break;
                 case State.ATTACK:
                     moveAgent.Stop();//순찰 및 추적을 정지
-                    animator.SetBool("IsMove", false);
                     if (enemyFire.isFire == false)
                     {
                         enemyFire.isFire = true;//총알 발사 시작
@@ -101,9 +90,7 @@ public class EnemyAI : MonoBehaviour
                 case State.DIE:
                     isDie = true;
                     enemyFire.isFire = false;
-                    moveAgent.Stop();//순찰 및 추적을 정지
-                    //animator.SetBool("IsMove", false);
-                    animator.SetTrigger("Die");//사망 애니메이션 실행
+                    moveAgent.Stop();//순찰 및 추적을 정지;
                     GetComponent<CapsuleCollider>().enabled = false;//Capsule collider 컴포넌트를 비활성화
                     //태그 변경
                     gameObject.tag = "Untagged";//나중에 enemy 개수 체크할 때 필요
